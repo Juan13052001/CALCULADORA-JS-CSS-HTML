@@ -4,6 +4,13 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="index.css" />
         <title>Calculadora</title>
     </head>
     <body>
@@ -14,22 +21,32 @@
                 <div class="valor-actual">0</div>
             </div>
             <div class="teclado">
-                <button value="1" id="1" class="numeros">1</button>
-                <button value="2" id="2" class="numeros">2</button>
-                <button value="3" id="3" class="numeros">3</button>
-                <button value="4" id="4" class="numeros">4</button>
-                <button value="5" id="5" class="numeros">5</button>
-                <button value="6" id="6" class="numeros">6</button>
-                <button value="7" id="7" class="numeros">7</button>
-                <button value="8" id="8" class="numeros">8</button>
-                <button value="9" id="9" class="numeros">9</button>
-                <button value="0" id="0" class="numeros">0</button>
-                <button value="+" id="suma" class="operando">+</button>
-                <button value="-" id="resta" class="operando">-</button>
-                <button value="*" id="multiplicar" class="operando">x</button>
-                <button value="/" id="dividir" class="operando">/</button>
-                <button value="=" class="igual" id="igual">=</button>
-                <button value="reset" class="borrar" id="borrar">AC</button>
+                <div class="item-1">
+                    <button value="7" id="7" class="numeros">7</button>
+                    <button value="8" id="8" class="numeros">8</button>
+                    <button value="9" id="9" class="numeros">9</button>
+                    <button value="/" id="dividir" class="operando">/</button>
+                </div>
+                <div class="item-2">
+                    <button value="4" id="4" class="numeros">4</button>
+                    <button value="5" id="5" class="numeros">5</button>
+                    <button value="6" id="6" class="numeros">6</button>
+                    <button value="*" id="mul" class="operando">x</button>
+                </div>
+                <div class="item-3">
+                    <button value="1" id="1" class="numeros">1</button>
+                    <button value="2" id="2" class="numeros">2</button>
+                    <button value="3" id="3" class="numeros">3</button>
+                    <button value="-" id="resta" class="operando">-</button>
+                </div>
+                <div class="item-4">
+                    <button value="reset" class="borrar" id="borrar">AC</button>
+                    <button value="0" id="0" class="numeros">0</button>
+                    <button value="=" class="igual" id="igual">=</button>
+                    <button value="+" id="suma" class="operando">+</button>
+                </div>
+
+                <button class="decimal">.</button>
             </div>
         </div>
         <script src="/index.js" type="module"></script>

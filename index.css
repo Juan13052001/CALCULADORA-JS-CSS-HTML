@@ -1,0 +1,85 @@
+body {
+    background-color: #8ecae6;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    font-family: "Noto Serif", serif;
+}
+
+h1 {
+    color: #c9184a;
+    font-style: oblique;
+    font-size: 60px;
+    font-weight: 400;
+}
+
+.calculadora {
+    border: 1px solid #000;
+    width: 350px;
+    height: 600px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.pantalla {
+    box-sizing: border-box;
+    height: 150px;
+    background-color: #333;
+    padding: 15px 30px;
+    color: #f1c0e8;
+    text-align: right;
+    border-bottom: 1px solid #fff;
+    font-size: 40px;
+    font-family: "Noto Serif", serif;
+}
+.teclado {
+    height: 480px;
+    padding-top: 20px;
+    background-color: #333;
+}
+
+button {
+    font-family: "Noto Serif", serif;
+    font-size: 30px;
+    width: 75px;
+    height: 70px;
+    margin: 10px 5px 10px 0;
+    border: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.numeros {
+    background-color: #f1c0e8;
+}
+
+.numeros:hover {
+    background-color: #ff006e;
+}
+
+.operando:hover {
+    background-color: #3a86ff;
+    color: whitesmoke;
+}
+.borrar:hover {
+    background-color: #3a86ff;
+    color: whitesmoke;
+}
+
+.igual:hover {
+    background-color: #3a86ff;
+    color: whitesmoke;
+}
+
+.decimal {
+    margin-top: 0;
+}
+
+.decimal:hover {
+    background-color: #3a86ff;
+    color: whitesmoke;
+}

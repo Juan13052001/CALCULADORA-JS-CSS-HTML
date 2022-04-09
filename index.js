@@ -1,26 +1,34 @@
 import { sumar, restar, dividir, multiplicar } from "./operaciones.js";
 
-let valueActual = "";
-let valueAnterior = "";
+let currentNum = "";
+let previousNum = "";
 let operador = "";
-
-const pantalla = document.querySelector(".pantalla");
 
 const valorPrevio = document.querySelector(".previous-value");
 
 const valorActual = document.querySelector(".valor-actual");
 
-const botonesNumero = document.querySelectorAll(".numeros");
-
-const botonesOperando = document.querySelectorAll(".operando");
-
 const igual = document.querySelector(".igual");
 
-igual.addEventListener("click", resultado);
+igual.addEventListener("click", () => {
+    if (currentNum != "" && previousNum != "") {
+        resultado();
+    }
+});
+
+const decimal = document.querySelector(".decimal");
+
+decimal.addEventListener("click", () => {
+    agregarDecimal();
+});
 
 const reset = document.querySelector(".borrar");
 
 reset.addEventListener("click", borrar);
+
+const botonesNumero = document.querySelectorAll(".numeros");
+
+const botonesOperando = document.querySelectorAll(".operando");
 
 botonesNumero.forEach((boton) => {
     boton.addEventListener("click", (e) => {
@@ -28,74 +36,94 @@ botonesNumero.forEach((boton) => {
     });
 });
 
+function handleNumber(number) {
+    if (previousNum !== "" && currentNum !== "" && operador === "") {
+        previousNum = "";
+        valorActual.textContent = currentNum;
+    }
+    if (currentNum.length <= 12) {
+        currentNum += number;
+        valorActual.textContent = currentNum;
+    }
+}
+
 botonesOperando.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         handleOperator(e.target.textContent);
     });
 });
 
-function handleNumber(number) {
-    if (valueAnterior !== "" && valueActual !== "" && operador === "") {
-        valueAnterior = "";
-        valorActual.textContent = valueActual;
-    }
-    valueActual += number;
-    valorActual.textContent = valueActual;
-}
-
 function handleOperator(op) {
-    if (valueAnterior === "") {
-        valueAnterior = valueActual;
+    if (previousNum === "") {
+        previousNum = currentNum;
         operatorCheck(op);
-    } else if (valueActual === "") {
+    } else if (currentNum === "") {
         operatorCheck(op);
     } else {
         resultado();
         operador = op;
         valorActual.textContent = "0";
-        valorPrevio.textContent = valueAnterior + " " + operador;
+        valorPrevio.textContent = previousNum + " " + operador;
     }
 }
 
-function resultado() {
-    valueAnterior = Number(valueAnterior);
-    valueActual = Number(valueActual);
-    console.log(typeof valueActual);
-    console.log(typeof valueAnterior);
-    console.log(operador);
-    console.log(typeof operador);
-    if (operador === "+") {
-        valueAnterior = sumar(valueAnterior, valueActual);
-    } else if (operador === "-") {
-        valueAnterior = restar(valueAnterior, valueActual);
-    } else if (operador === "x") {
-        valueAnterior = multiplicar(valueAnterior, valueActual);
-    } else if (operador === "/") {
-        valueAnterior = dividir(valueAnterior, valueActual);
-    }
-    valueAnterior = valueAnterior.toString();
-    displayResults();
-}
-function displayResults() {
-    if (valueAnterior.length <= 11) {
-        valorActual.textContent = valueAnterior;
-    } else {
-        valorActual.textContent = valueAnterior.slice(0, 11) + "...";
-    }
-    valorPrevio.textContent = "";
-    operador = "";
-    valueActual = "";
-}
-function borrar() {
-    valueActual = "";
-    valueAnterior = "";
-    operador = "";
-    valorActual.textContent = "0";
-    valorPrevio.textContent = "";
-}
 function operatorCheck(text) {
     operador = text;
-    valorPrevio.textContent = valueAnterior + " " + operador;
+    valorPrevio.textContent = previousNum + " " + operador;
     valorActual.textContent = "0";
-    valueActual = "";
+    currentNum = "";
+}
+
+function resultado() {
+    previousNum = Number(previousNum);
+
+    currentNum = Number(currentNum);
+
+    if (operador === "+") {
+        previousNum += currentNum;
+    } else if (operador === "-") {
+        previousNum -= currentNum;
+    } else if (operador === "x") {
+        previousNum *= currentNum;
+    } else if (operador === "/") {
+        if (currentNum <= 0) {
+            previousNum = "Error";
+            displayResults();
+            return;
+        }
+        previousNum /= currentNum;
+    }
+    previousNum = redondear(previousNum);
+    previousNum = previousNum.toString();
+    displayResults();
+}
+
+function redondear(numero) {
+    return Math.round(numero * 1000000) / 1000000;
+}
+
+function displayResults() {
+    if (previousNum.length <= 11) {
+        valorActual.textContent = previousNum;
+    } else {
+        valorActual.textContent = previousNum.slice(0, 11) + "...";
+    }
+    valorPrevio.textContent = "";
+    operador = "";
+    currentNum = "";
+}
+
+function borrar() {
+    currentNum = "";
+    previousNum = "";
+    operador = "";
+    valorActual.textContent = "0";
+    valorPrevio.textContent = "";
+}
+
+function agregarDecimal() {
+    if (!currentNum.includes(".")) {
+        currentNum += ".";
+        valorActual.textContent = currentNum;
+    }
 }
